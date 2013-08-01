@@ -17,7 +17,14 @@ class Oracle
     end
     eval("$#{variable} = @variable")
   end
-
+  def apply (query, rollback)
+    if !rollback
+      @oci.exec(query)
+      @oci.commit
+    else
+      @oci.exec(query)
+    end
+  end
   #Set table name and values ["name = 'John', employee_id = 39994"]
   def insert (table, values, rollback)
     if rollback == false
