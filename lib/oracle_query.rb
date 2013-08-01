@@ -4,7 +4,9 @@ class Oracle
   def initialize (username, password, db_connection)
     @oci = OCI8.new(username, password, db_connection)
   end
-
+  def initialize (full_path)
+    @oci = OCI8.new(full_path)
+  end
   def procedure(procedure)
     @oci.exec("BEGIN #{procedure}; END;")
   end
